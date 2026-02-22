@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/19"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.bibliotheque_municipale.HelloController"
+      spacing="15" style="-fx-padding: 25; -fx-background-color: #f5f7fa;">
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="👥 Gestion des Adhérents" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1a237e;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lblTotal" text="" style="-fx-text-fill: #757575;"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),5,0,0,1);">
+        <TextField fx:id="txtRecherche" promptText="Rechercher par nom, prénom, matricule..." prefWidth="320"
+                   style="-fx-font-size: 12px; -fx-padding: 8; -fx-background-radius: 6; -fx-border-color: #e0e0e0; -fx-border-radius: 6;"/>
+        <Button text="🔍 Rechercher"
+                style="-fx-background-color: #1565C0; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 6; -fx-cursor: hand;"/>
+        <Button text="✖ Réinitialiser"
+                style="-fx-background-color: #757575; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 6; -fx-cursor: hand;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="➕ Inscrire"
+                style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-padding: 8 18; -fx-background-radius: 6; -fx-cursor: hand; -fx-font-weight: bold;"/>
+        <Button text="✏️ Modifier"
+                style="-fx-background-color: #e65100; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 6; -fx-cursor: hand;"/>
+        <Button text="⏸ Suspendre/Activer"
+                style="-fx-background-color: #7b1fa2; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 6; -fx-cursor: hand;"/>
+        <Button text="📋 Historique"
+                style="-fx-background-color: #0277bd; -fx-text-fill: white; -fx-padding: 8 15; -fx-background-radius: 6; -fx-cursor: hand;"/>
+    </HBox>
+
+    <TableView fx:id="tableAdherents" VBox.vgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),5,0,0,1);">
+        <columns>
+            <TableColumn fx:id="colMatricule" text="Matricule" prefWidth="110"/>
+            <TableColumn fx:id="colNom" text="Nom" prefWidth="150"/>
+            <TableColumn fx:id="colPrenom" text="Prénom" prefWidth="150"/>
+            <TableColumn fx:id="colTelephone" text="Téléphone" prefWidth="120"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="200"/>
+            <TableColumn fx:id="colStatut" text="Statut" prefWidth="90"/>
+        </columns>
+        <placeholder><Label text="Aucun adhérent trouvé" style="-fx-text-fill: #9e9e9e;"/></placeholder>
+    </TableView>
+</VBox>
