@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.bibliotheque_municipale.controleur.DashboardController">
+
+    <top>
+        <HBox style="-fx-background-color: #2E7D32; -fx-padding: 12 20; -fx-alignment: center-left; -fx-spacing: 15;">
+            <Label text="📚 Bibliotheque Municipale de Dakar"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Label text="Connecte : " style="-fx-text-fill: #C8E6C9; -fx-font-size: 12px;"/>
+            <Label fx:id="lblNomUtilisateur" text="" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;"/>
+            <Label text=" | " style="-fx-text-fill: #81C784;"/>
+            <Label fx:id="lblProfil" text="" style="-fx-text-fill: #A5D6A7; -fx-font-size: 12px;"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox style="-fx-background-color: #1B5E20; -fx-padding: 20 0; -fx-spacing: 5;" prefWidth="200.0">
+            <Label text="NAVIGATION" style="-fx-text-fill: #81C784; -fx-font-size: 11px; -fx-padding: 10 15 5 15; -fx-font-weight: bold;"/>
+
+            <Button text="🏠  Dashboard" prefWidth="200.0" prefHeight="40.0"
+                    style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+
+            <Button text="📚  Livres" prefWidth="200.0" prefHeight="40.0" onAction="#ouvrirLivres"
+                    style="-fx-background-color: transparent; -fx-text-fill: #C8E6C9; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+
+            <Button text="👥  Adherants" prefWidth="200.0" prefHeight="40.0" onAction="#ouvrirAdherents"
+                    style="-fx-background-color: transparent; -fx-text-fill: #C8E6C9; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+
+            <Button text="📋  Emprunts" prefWidth="200.0" prefHeight="40.0" onAction="#ouvrirEmprunts"
+                    style="-fx-background-color: transparent; -fx-text-fill: #C8E6C9; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+
+            <HBox fx:id="menuUtilisateurs">
+                <Button text="⚙  Utilisateurs" prefWidth="200.0" prefHeight="40.0" onAction="#ouvrirUtilisateurs"
+                        style="-fx-background-color: transparent; -fx-text-fill: #C8E6C9; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+            </HBox>
+
+            <Pane VBox.vgrow="ALWAYS"/>
+
+            <Button text="🚪  Deconnexion" prefWidth="200.0" prefHeight="40.0" onAction="#seDeconnecter"
+                    style="-fx-background-color: #C62828; -fx-text-fill: white; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox style="-fx-background-color: #F1F8E9; -fx-padding: 25; -fx-spacing: 18;">
+
+            <Label text="Tableau de bord" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+            <Label text="Vue d'ensemble de la bibliotheque" style="-fx-font-size: 13px; -fx-text-fill: #666;"/>
+
+            <!-- cartes stats -->
+            <HBox spacing="18">
+                <VBox style="-fx-background-color: white; -fx-padding: 18 20; -fx-background-radius: 8; -fx-border-color: #C8E6C9; -fx-border-radius: 8; -fx-border-width: 1;" prefWidth="190.0">
+                    <Label text="📚  Total Livres" style="-fx-font-size: 12px; -fx-text-fill: #888;"/>
+                    <Label fx:id="lblNbLivres" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #2E7D32; -fx-padding: 5 0 0 0;"/>
+                    <Label text="dans le catalogue" style="-fx-font-size: 10px; -fx-text-fill: #aaa;"/>
+                </VBox>
+                <VBox style="-fx-background-color: white; -fx-padding: 18 20; -fx-background-radius: 8; -fx-border-color: #C8E6C9; -fx-border-radius: 8; -fx-border-width: 1;" prefWidth="190.0">
+                    <Label text="👥  Adherants" style="-fx-font-size: 12px; -fx-text-fill: #888;"/>
+                    <Label fx:id="lblNbAdherents" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #388E3C; -fx-padding: 5 0 0 0;"/>
+                    <Label text="membres actifs" style="-fx-font-size: 10px; -fx-text-fill: #aaa;"/>
+                </VBox>
+                <VBox style="-fx-background-color: white; -fx-padding: 18 20; -fx-background-radius: 8; -fx-border-color: #C8E6C9; -fx-border-radius: 8; -fx-border-width: 1;" prefWidth="190.0">
+                    <Label text="📋  Emprunts" style="-fx-font-size: 12px; -fx-text-fill: #888;"/>
+                    <Label fx:id="lblEmpruntsMonth" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #F57F17; -fx-padding: 5 0 0 0;"/>
+                    <Label text="ce mois-ci" style="-fx-font-size: 10px; -fx-text-fill: #aaa;"/>
+                </VBox>
+                <VBox style="-fx-background-color: white; -fx-padding: 18 20; -fx-background-radius: 8; -fx-border-color: #FFCDD2; -fx-border-radius: 8; -fx-border-width: 1;" prefWidth="190.0">
+                    <Label text="⚠  Retards" style="-fx-font-size: 12px; -fx-text-fill: #C62828;"/>
+                    <Label fx:id="lblRetards" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #C62828; -fx-padding: 5 0 0 0;"/>
+                    <Label text="emprunts en retard" style="-fx-font-size: 10px; -fx-text-fill: #aaa;"/>
+                </VBox>
+            </HBox>
+
+            <!-- tableau retards -->
+            <VBox style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8; -fx-border-color: #E0E0E0; -fx-border-radius: 8; -fx-border-width: 1;" VBox.vgrow="ALWAYS">
+                <HBox style="-fx-alignment: center-left; -fx-spacing: 8; -fx-padding: 0 0 10 0;">
+                    <Label text="⚠" style="-fx-text-fill: #C62828; -fx-font-size: 14px;"/>
+                    <Label text="Liste des emprunts en retard"
+                           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #C62828;"/>
+                </HBox>
+                <TableView fx:id="tblRetards" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colLivreRetard"      text="Titre du livre"  prefWidth="320"/>
+                        <TableColumn fx:id="colAdherentRetard"   text="Adherant"        prefWidth="220"/>
+                        <TableColumn fx:id="colDatePrevueRetard" text="Retour prevu"    prefWidth="180"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

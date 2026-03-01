@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.bibliotheque_municipale.controleur.EmpruntsController">
+
+    <top>
+        <HBox style="-fx-background-color: #2E7D32; -fx-padding: 12 20;">
+            <Label text="📚 Bibliotheque Municipale de Dakar"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox style="-fx-background-color: #1B5E20; -fx-padding: 20 0; -fx-spacing: 5;" prefWidth="200.0">
+            <Label text="NAVIGATION" style="-fx-text-fill: #81C784; -fx-font-size: 11px; -fx-padding: 10 15 5 15; -fx-font-weight: bold;"/>
+            <Button text="🏠  Dashboard" prefWidth="200.0" prefHeight="40.0" onAction="#retourDashboard"
+                    style="-fx-background-color: transparent; -fx-text-fill: #C8E6C9; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+            <Button text="📋  Emprunts" prefWidth="200.0" prefHeight="40.0"
+                    style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox style="-fx-background-color: #F1F8E9; -fx-padding: 20; -fx-spacing: 15;">
+            <Label text="Gestion des Emprunts" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+
+            <!-- nouvel emprunt -->
+            <HBox style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8; -fx-spacing: 15; -fx-alignment: center-left;">
+                <Label text="Nouvel emprunt :" style="-fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                <ComboBox fx:id="cboLivre" prefWidth="280.0" prefHeight="36.0" promptText="Choisir un livre..."/>
+                <ComboBox fx:id="cboAdherent" prefWidth="250.0" prefHeight="36.0" promptText="Choisir un adherant..."/>
+                <Button text="✅ Enregistrer" onAction="#enregistrerEmprunt" prefHeight="36.0"
+                        style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <!-- filtres + bouton retour -->
+            <HBox spacing="10" style="-fx-alignment: center-left;">
+                <Label text="Afficher : " style="-fx-font-weight: bold;"/>
+                <RadioButton fx:id="rbTous" text="Tous" onAction="#filtrerEmprunts" selected="true"/>
+                <RadioButton fx:id="rbEnCours" text="En cours" onAction="#filtrerEmprunts"/>
+                <RadioButton fx:id="rbRetards" text="Retards" onAction="#filtrerEmprunts" style="-fx-text-fill: #C62828;"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="📦 Enregistrer retour" onAction="#enregistrerRetour" prefHeight="36.0"
+                        style="-fx-background-color: #F57F17; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <VBox style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8;" VBox.vgrow="ALWAYS">
+                <TableView fx:id="tblEmprunts" VBox.vgrow="ALWAYS" prefHeight="450.0">
+                    <columns>
+                        <TableColumn fx:id="colLivre" text="Livre" prefWidth="240"/>
+                        <TableColumn fx:id="colAdherent" text="Adherant" prefWidth="180"/>
+                        <TableColumn fx:id="colDateEmprunt" text="Date emprunt" prefWidth="130"/>
+                        <TableColumn fx:id="colDatePrevue" text="Retour prevu" prefWidth="130"/>
+                        <TableColumn fx:id="colStatut" text="Statut" prefWidth="100"/>
+                        <TableColumn fx:id="colPenalite" text="Penalite (FCFA)" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

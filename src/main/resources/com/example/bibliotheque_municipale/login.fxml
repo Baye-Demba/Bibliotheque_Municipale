@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane prefHeight="550.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.bibliotheque_municipale.controleur.LoginController">
+
+    <!-- GAUCHE 40% = 360px - partie verte -->
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="550.0" prefWidth="360.0"
+          style="-fx-background-color: #2E7D32; -fx-alignment: center; -fx-padding: 50 40;">
+        <Label text="📚"
+               style="-fx-font-size: 55px;"/>
+        <Label text="Bibliotheque"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 10 0 0 0;"/>
+        <Label text="Municipale de Dakar"
+               style="-fx-font-size: 16px; -fx-text-fill: #C8E6C9;"/>
+        <Label text="Systeme de Gestion"
+               style="-fx-font-size: 12px; -fx-text-fill: #A5D6A7; -fx-padding: 18 0 0 0;"/>
+        <Label text="2025 · ByDemba &amp; Meissa"
+               style="-fx-font-size: 11px; -fx-text-fill: #81C784; -fx-padding: 25 0 0 0;"/>
+    </VBox>
+
+    <!-- DROITE 60% = 540px - partie blanche connexion -->
+    <VBox layoutX="360.0" layoutY="0.0" prefHeight="550.0" prefWidth="540.0"
+          style="-fx-background-color: white; -fx-alignment: center; -fx-padding: 55 60;">
+
+        <Label text="Connexion"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+        <Label text="Entrez vos identifiants pour continuer"
+               style="-fx-font-size: 12px; -fx-text-fill: #999; -fx-padding: 5 0 28 0;"/>
+
+        <Label text="Login"
+               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
+        <TextField fx:id="txtLogin" promptText="Votre login"
+                   style="-fx-pref-height: 40; -fx-background-radius: 5; -fx-border-color: #C8E6C9; -fx-border-radius: 5; -fx-font-size: 13px; -fx-pref-width: 400;">
+            <VBox.margin><Insets bottom="16.0" top="5.0"/></VBox.margin>
+        </TextField>
+
+        <Label text="Mot de passe"
+               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
+        <PasswordField fx:id="txtMotDePasse" promptText="Votre mot de passe"
+                       style="-fx-pref-height: 40; -fx-background-radius: 5; -fx-border-color: #C8E6C9; -fx-border-radius: 5; -fx-font-size: 13px; -fx-pref-width: 400;">
+            <VBox.margin><Insets bottom="12.0" top="5.0"/></VBox.margin>
+        </PasswordField>
+
+        <Label fx:id="lblErreur" text=""
+               style="-fx-text-fill: #C62828; -fx-font-size: 12px;">
+            <VBox.margin><Insets bottom="10.0"/></VBox.margin>
+        </Label>
+
+        <Button text="Se connecter" onAction="#seConnecter"
+                prefWidth="400.0" prefHeight="42.0"
+                style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;"/>
+
+        <Label text="© 2025 · ByDemba &amp; Meissa"
+               style="-fx-font-size: 10px; -fx-text-fill: #ccc; -fx-padding: 28 0 0 0;"/>
+    </VBox>
+
+</AnchorPane>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.bibliotheque_municipale.controleur.LivresController">
+
+    <top>
+        <HBox style="-fx-background-color: #2E7D32; -fx-padding: 12 20;">
+            <Label text="📚 Bibliotheque Municipale de Dakar"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox style="-fx-background-color: #1B5E20; -fx-padding: 20 0; -fx-spacing: 5;" prefWidth="200.0">
+            <Label text="NAVIGATION" style="-fx-text-fill: #81C784; -fx-font-size: 11px; -fx-padding: 10 15 5 15; -fx-font-weight: bold;"/>
+            <Button text="🏠  Dashboard" prefWidth="200.0" prefHeight="40.0" onAction="#retourDashboard"
+                    style="-fx-background-color: transparent; -fx-text-fill: #C8E6C9; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+            <Button text="📚  Livres" prefWidth="200.0" prefHeight="40.0"
+                    style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-alignment: center-left; -fx-padding: 0 0 0 15; -fx-font-size: 13px; -fx-cursor: hand; -fx-border-color: transparent;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox style="-fx-background-color: #F1F8E9; -fx-padding: 20; -fx-spacing: 15;">
+            <Label text="Gestion des Livres" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+
+            <HBox spacing="10" style="-fx-alignment: center-left;">
+                <TextField fx:id="txtRecherche" promptText="Rechercher par titre, auteur ou ISBN..."
+                           prefWidth="350.0" prefHeight="36.0"
+                           style="-fx-background-radius: 5; -fx-border-color: #C8E6C9; -fx-border-radius: 5;"/>
+                <Button text="🔍 Rechercher" onAction="#rechercher" prefHeight="36.0"
+                        style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;"/>
+            </HBox>
+
+            <HBox spacing="15" VBox.vgrow="ALWAYS">
+                <VBox HBox.hgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8;">
+                    <TableView fx:id="tblLivres" VBox.vgrow="ALWAYS" prefHeight="500.0">
+                        <columns>
+                            <TableColumn fx:id="colIsbn" text="ISBN" prefWidth="110"/>
+                            <TableColumn fx:id="colTitre" text="Titre" prefWidth="180"/>
+                            <TableColumn fx:id="colAuteur" text="Auteur" prefWidth="130"/>
+                            <TableColumn fx:id="colCategorie" text="Categorie" prefWidth="110"/>
+                            <TableColumn fx:id="colAnnee" text="Annee" prefWidth="65"/>
+                            <TableColumn fx:id="colExemplaires" text="Exemplaires" prefWidth="95"/>
+                            <TableColumn fx:id="colDisponibilite" text="Disponibilite" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <VBox style="-fx-background-color: white; -fx-padding: 20; -fx-spacing: 10; -fx-background-radius: 8;" prefWidth="280.0">
+                    <Label text="Infos du livre" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+
+                    <Label text="ISBN"/>
+                    <TextField fx:id="txtIsbn" promptText="ISBN"
+                               style="-fx-pref-height: 34; -fx-border-color: #E0E0E0; -fx-border-radius: 4; -fx-background-radius: 4;"/>
+                    <Label text="Titre *"/>
+                    <TextField fx:id="txtTitre" promptText="Titre"
+                               style="-fx-pref-height: 34; -fx-border-color: #E0E0E0; -fx-border-radius: 4; -fx-background-radius: 4;"/>
+                    <Label text="Auteur *"/>
+                    <TextField fx:id="txtAuteur" promptText="Auteur"
+                               style="-fx-pref-height: 34; -fx-border-color: #E0E0E0; -fx-border-radius: 4; -fx-background-radius: 4;"/>
+                    <Label text="Categorie *"/>
+                    <ComboBox fx:id="cboCategorie" prefWidth="240.0" prefHeight="34.0" promptText="Choisir..."
+                              style="-fx-border-color: #E0E0E0; -fx-border-radius: 4; -fx-background-radius: 4;"/>
+                    <Label text="Annee"/>
+                    <TextField fx:id="txtAnnee" promptText="ex: 2020"
+                               style="-fx-pref-height: 34; -fx-border-color: #E0E0E0; -fx-border-radius: 4; -fx-background-radius: 4;"/>
+                    <Label text="Exemplaires"/>
+                    <TextField fx:id="txtExemplaires" promptText="ex: 3"
+                               style="-fx-pref-height: 34; -fx-border-color: #E0E0E0; -fx-border-radius: 4; -fx-background-radius: 4;"/>
+
+                    <HBox spacing="8">
+                        <VBox.margin><Insets top="10.0"/></VBox.margin>
+                        <Button text="Ajouter" onAction="#ajouter" prefHeight="700.0" prefWidth="1200.0"
+                                style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                        <Button text="Modifier" onAction="#modifier" prefHeight="700.0" prefWidth="1200.0"
+                                style="-fx-background-color: #388E3C; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                    </HBox>
+                    <HBox spacing="8">
+                        <Button fx:id="btnSupprimer" text="Supprimer" onAction="#supprimer" prefHeight="700.0" prefWidth="1200.0"
+                                style="-fx-background-color: #C62828; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                        <Button text="Vider" onAction="#vider" prefHeight="700.0" prefWidth="1200.0"
+                                style="-fx-background-color: #757575; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

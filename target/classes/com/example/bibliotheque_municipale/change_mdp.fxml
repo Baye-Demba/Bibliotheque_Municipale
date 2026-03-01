@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox prefHeight="350.0" prefWidth="500.0"
+      style="-fx-background-color: white; -fx-padding: 50; -fx-alignment: center;"
+      xmlns="http://javafx.com/javafx/19"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.bibliotheque_municipale.controleur.ChangeMdpController">
+
+    <Label text="🔒 Premiere connexion" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+    <Label text="Vous devez changer votre mot de passe."
+           style="-fx-font-size: 12px; -fx-text-fill: #666; -fx-padding: 8 0 25 0;"/>
+
+    <Label text="Nouveau mot de passe" style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+    <PasswordField fx:id="txtNouveauMdp" promptText="Min. 6 caracteres"
+                   style="-fx-pref-height: 38; -fx-border-color: #C8E6C9; -fx-border-radius: 5; -fx-background-radius: 5;">
+        <VBox.margin><Insets bottom="15.0" top="5.0"/></VBox.margin>
+    </PasswordField>
+
+    <Label text="Confirmer" style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+    <PasswordField fx:id="txtConfirmMdp" promptText="Repetez le mot de passe"
+                   style="-fx-pref-height: 38; -fx-border-color: #C8E6C9; -fx-border-radius: 5; -fx-background-radius: 5;">
+        <VBox.margin><Insets bottom="10.0" top="5.0"/></VBox.margin>
+    </PasswordField>
+
+    <Label fx:id="lblErreur" text="" style="-fx-text-fill: #C62828; -fx-font-size: 12px;">
+        <VBox.margin><Insets bottom="10.0"/></VBox.margin>
+    </Label>
+
+    <Button text="Valider" onAction="#valider"
+            prefWidth="400.0" prefHeight="40.0"
+            style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;"/>
+</VBox>
