@@ -14,3 +14,7 @@ COMPTES PAR DEFAUT
 ------------------
 Admin     : login = admin    / mdp = admin123  (changement de mdp obligatoire a la 1ere connexion)
 Biblio    : login = ByDemba  / mdp = passer@1
+
+CREATION DE SETUP
+------------------
+On est allé vers le Maven double cliquer sur Clean on attends qu'il construit et si on a BUILD SUCCESS on double clique sur Package on attend le même resultat Il crée un nouveau document target avec des données à l'interieur 
