@@ -95,13 +95,23 @@ public class LivresController implements Initializable {
             return;
         }
         try {
+            int annee = Integer.parseInt(txtAnnee.getText().trim());
+            if (annee < 1000 || annee > 2026) {
+                showAlert(Alert.AlertType.ERROR, "l'annee doit etre entre 1000 et 2026");
+                return;
+            }
+            int exemplaires = Integer.parseInt(txtExemplaires.getText().trim());
+            if (exemplaires < 1) {
+                showAlert(Alert.AlertType.ERROR, "le nombre d'exemplaires doit etre au moins 1");
+                return;
+            }
             Livre l = new Livre();
             l.setIsbn(txtIsbn.getText().trim());
             l.setTitre(txtTitre.getText().trim());
             l.setAuteur(txtAuteur.getText().trim());
             l.setCategorie(cboCategorie.getValue());
-            l.setAnneePublication(Integer.parseInt(txtAnnee.getText().trim()));
-            l.setNombreExemplaires(Integer.parseInt(txtExemplaires.getText().trim()));
+            l.setAnneePublication(annee);
+            l.setNombreExemplaires(exemplaires);
             if (livreDAO.ajouter(l) > 0) {
                 showAlert(Alert.AlertType.INFORMATION, "Livre ajoute !");
                 viderFormulaire();
@@ -116,12 +126,22 @@ public class LivresController implements Initializable {
     void modifier(ActionEvent event) {
         if (livreSelectionne == null) { showAlert(Alert.AlertType.ERROR, "Selectionnez un livre."); return; }
         try {
+            int annee = Integer.parseInt(txtAnnee.getText().trim());
+            if (annee < 1000 || annee > 2026) {
+                showAlert(Alert.AlertType.ERROR, "l'annee doit etre entre 1000 et 2026");
+                return;
+            }
+            int exemplaires = Integer.parseInt(txtExemplaires.getText().trim());
+            if (exemplaires < 1) {
+                showAlert(Alert.AlertType.ERROR, "le nombre d'exemplaires doit etre au moins 1");
+                return;
+            }
             livreSelectionne.setIsbn(txtIsbn.getText().trim());
             livreSelectionne.setTitre(txtTitre.getText().trim());
             livreSelectionne.setAuteur(txtAuteur.getText().trim());
             livreSelectionne.setCategorie(cboCategorie.getValue());
-            livreSelectionne.setAnneePublication(Integer.parseInt(txtAnnee.getText().trim()));
-            livreSelectionne.setNombreExemplaires(Integer.parseInt(txtExemplaires.getText().trim()));
+            livreSelectionne.setAnneePublication(annee);
+            livreSelectionne.setNombreExemplaires(exemplaires);
             if (livreDAO.modifier(livreSelectionne) > 0) {
                 showAlert(Alert.AlertType.INFORMATION, "Livre modifie !");
                 viderFormulaire();

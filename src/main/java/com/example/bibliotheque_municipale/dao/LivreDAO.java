@@ -15,8 +15,8 @@ public class LivreDAO {
         List<Livre> liste = new ArrayList<>();
         try {
             ResultSet rs = db.select(
-                "SELECT l.*, c.id as cat_id, c.libelle as cat_libelle, c.description as cat_desc " +
-                "FROM livres l LEFT JOIN categories c ON l.categorie_id = c.id ORDER BY l.titre"
+                    "SELECT l.*, c.id as cat_id, c.libelle as cat_libelle, c.description as cat_desc " +
+                            "FROM livres l LEFT JOIN categories c ON l.categorie_id = c.id ORDER BY l.titre"
             );
             while (rs != null && rs.next()) liste.add(extraireLivre(rs));
         } catch (Exception ex) {
@@ -33,10 +33,10 @@ public class LivreDAO {
         try {
             String s = "%" + motCle + "%";
             ResultSet rs = db.select(
-                "SELECT l.*, c.id as cat_id, c.libelle as cat_libelle, c.description as cat_desc " +
-                "FROM livres l LEFT JOIN categories c ON l.categorie_id = c.id " +
-                "WHERE l.titre LIKE ? OR l.auteur LIKE ? OR l.isbn LIKE ?",
-                s, s, s
+                    "SELECT l.*, c.id as cat_id, c.libelle as cat_libelle, c.description as cat_desc " +
+                            "FROM livres l LEFT JOIN categories c ON l.categorie_id = c.id " +
+                            "WHERE l.titre LIKE ? OR l.auteur LIKE ? OR l.isbn LIKE ?",
+                    s, s, s
             );
             while (rs != null && rs.next()) liste.add(extraireLivre(rs));
         } catch (Exception ex) {
@@ -50,10 +50,27 @@ public class LivreDAO {
     public int ajouter(Livre l) {
         DB db = new DB();
         try {
-            return db.maj(
-                "INSERT INTO livres (isbn, titre, auteur, categorie_id, annee_publication, nombre_exemplaires, disponible) VALUES (?,?,?,?,?,?,1)",
-                l.getIsbn(), l.getTitre(), l.getAuteur(), l.getCategorie().getId(), l.getAnneePublication(), l.getNombreExemplaires()
+            // on insere d'abord sans isbn pour recuperer l'id genere
+            int res = db.maj(
+                    "INSERT INTO livres (titre, auteur, categorie_id, annee_publication, nombre_exemplaires, disponible) VALUES (?,?,?,?,?,1)",
+                    l.getTitre(), l.getAuteur(), l.getCategorie().getId(), l.getAnneePublication(), l.getNombreExemplaires()
             );
+            if (res > 0) {
+                // recuperer le dernier id insere
+                ResultSet rs = db.select("SELECT LAST_INSERT_ID() as last_id");
+                if (rs != null && rs.next()) {
+                    int newId = rs.getInt("last_id");
+                    // si isbn vide ou null on genere automatiquement
+                    String isbn = (l.getIsbn() == null || l.getIsbn().trim().isEmpty())
+                            ? "sans-isbn-" + newId
+                            : l.getIsbn().trim();
+                    db.maj("UPDATE livres SET isbn = ? WHERE id = ?", isbn, newId);
+                }
+            }
+            return res;
+        } catch (Exception ex) {
+            System.out.println("Erreur ajouter livre : " + ex.getMessage());
+            return 0;
         } finally {
             db.fermer();
         }
@@ -62,10 +79,17 @@ public class LivreDAO {
     public int modifier(Livre l) {
         DB db = new DB();
         try {
+            // si isbn vide on garde "sans-isbn-id"
+            String isbn = (l.getIsbn() == null || l.getIsbn().trim().isEmpty())
+                    ? "sans-isbn-" + l.getId()
+                    : l.getIsbn().trim();
             return db.maj(
-                "UPDATE livres SET isbn=?, titre=?, auteur=?, categorie_id=?, annee_publication=?, nombre_exemplaires=? WHERE id=?",
-                l.getIsbn(), l.getTitre(), l.getAuteur(), l.getCategorie().getId(), l.getAnneePublication(), l.getNombreExemplaires(), l.getId()
+                    "UPDATE livres SET isbn=?, titre=?, auteur=?, categorie_id=?, annee_publication=?, nombre_exemplaires=? WHERE id=?",
+                    isbn, l.getTitre(), l.getAuteur(), l.getCategorie().getId(), l.getAnneePublication(), l.getNombreExemplaires(), l.getId()
             );
+        } catch (Exception ex) {
+            System.out.println("Erreur modifier livre : " + ex.getMessage());
+            return 0;
         } finally {
             db.fermer();
         }
